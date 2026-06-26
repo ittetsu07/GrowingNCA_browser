@@ -1,0 +1,19 @@
+{
+  "name": "browser-growing-nca",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0",
+    "vitest": "^3.2.0"
+  },
+  "dependencies": {
+    "@jax-js/jax": "^0.1.16",
+    "@jax-js/optax": "^0.1.2"
+  }
+}

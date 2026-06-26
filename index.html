@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Growing NCA — Browser Training</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <main>
+      <section class="intro">
+        <p class="eyebrow">JAX-js × WebGPU / Wasm</p>
+        <h1>Train a Growing NCA<br />in your browser.</h1>
+        <p class="lede">
+          A tiny neural cellular automaton learns to grow a flower from one living cell. The
+          model, gradients, and optimizer never leave this page.
+        </p>
+      </section>
+
+      <section class="panels" aria-label="Neural cellular automaton output">
+        <figure><figcaption>Training target</figcaption><canvas id="target" width="32" height="32"></canvas></figure>
+        <figure><figcaption>Current growth</figcaption><canvas id="world" width="32" height="32"></canvas></figure>
+      </section>
+
+      <section class="controls" aria-label="Training controls">
+        <button id="toggle" type="button" disabled>Start training</button>
+        <button id="reset-model" type="button" disabled>New model</button>
+        <button id="reset-state" type="button" disabled>Reset seed</button>
+        <label>Backend <select id="backend" disabled><option value="auto">Auto</option><option value="wasm">Wasm</option><option value="webgpu">WebGPU</option></select></label>
+      </section>
+      <output id="status" aria-live="polite">Initializing JAX-js…</output>
+    </main>
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>
