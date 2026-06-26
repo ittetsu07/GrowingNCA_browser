@@ -1,4 +1,5 @@
 import { defaultDevice, init, tree } from "@jax-js/jax";
+import { initializeBackend } from "./backend.js";
 import { CHANNELS, createModel, createSeed, createTarget, createTrainer, readPixels, rollout, trainStep } from "./nca.js";
 
 const SIZE = 32;
@@ -50,12 +51,12 @@ function updateStatus() {
   status.value = `${activeDevice.toUpperCase()} · ${iteration} gradient steps${loss}`;
 }
 
+function setStatus(message) {
+  status.value = message;
+}
+
 async function chooseBackend(preference) {
-  const devices = await init();
-  activeDevice = preference === "webgpu" && devices.includes("webgpu") ? "webgpu" : "wasm";
-  if (preference === "auto") activeDevice = devices.includes("webgpu") ? "webgpu" : "wasm";
-  if (!devices.includes(activeDevice)) activeDevice = devices[0] ?? "cpu";
-  defaultDevice(activeDevice);
+  activeDevice = await initializeBackend(preference, { init, defaultDevice });
 }
 
 function freshModel() {
@@ -113,9 +114,12 @@ backend.addEventListener("change", async () => {
 
 try {
   await chooseBackend("auto");
+  setStatus(`${activeDevice.toUpperCase()} · preparing target…`);
   target = createTarget(SIZE);
   freshModel();
   await renderTarget();
+  setStatus(`${activeDevice.toUpperCase()} · compiling first NCA rollout…`);
+  await new Promise(requestAnimationFrame);
   await renderWorld();
   controls.forEach((control) => { control.disabled = false; });
   updateStatus();
