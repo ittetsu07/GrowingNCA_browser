@@ -1,18 +1,25 @@
-:root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #0b1020; color: #eaf0ff; }
+:root { font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #202019; background: #f8f8f4; }
 * { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; background: radial-gradient(circle at 50% 0%, #25336a 0, #0b1020 48rem); }
-main { width: min(900px, calc(100% - 2rem)); margin: 0 auto; padding: clamp(3rem, 10vw, 7rem) 0 3rem; }
-.intro { max-width: 680px; }
-.eyebrow { color: #8da4ff; text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 700; }
-h1 { margin: .3rem 0 1rem; font-size: clamp(2.4rem, 7vw, 5rem); line-height: .98; letter-spacing: -.06em; }
-.lede { max-width: 57ch; line-height: 1.65; color: #bdc8e8; }
-.panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 4vw, 3rem); margin: 3.5rem 0 2rem; }
-figure { margin: 0; } figcaption { margin-bottom: .75rem; color: #bdc8e8; font-size: .9rem; }
-canvas { width: 100%; max-width: 320px; display: block; image-rendering: pixelated; background: #050814; border: 1px solid #35426d; box-shadow: 0 1rem 3rem #0005; }
-.controls { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; }
-button, select { border: 1px solid #58699c; background: #182243; color: inherit; padding: .7rem .9rem; border-radius: .45rem; font: inherit; cursor: pointer; }
-button:first-child { background: #8da4ff; color: #101632; border-color: #aebcff; font-weight: 700; }
-button:disabled, select:disabled { opacity: .5; cursor: wait; } label { color: #bdc8e8; font-size: .9rem; } select { margin-left: .4rem; padding: .55rem; }
-button:focus-visible, select:focus-visible { outline: 3px solid #d7dfff; outline-offset: 2px; }
-output { display: block; margin-top: 1.2rem; color: #8da4ff; font-variant-numeric: tabular-nums; }
-@media (max-width: 560px) { .panels { gap: 1rem; } }
+body { margin: 0; }
+.demo-shell { max-width: 1280px; margin: 0 auto; padding: 1rem; }
+header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; font-size: .88rem; color: #66665e; }
+header a { color: #202019; text-decoration: none; font-weight: 700; }
+.workspace { display: grid; grid-template-columns: 280px minmax(0, 1fr) 240px; gap: 1rem; align-items: start; }
+.control-panel, .metrics { display: grid; gap: .75rem; }
+.card, .canvas-card { border: 1px solid #00000019; border-radius: .6rem; background: #fff; padding: .8rem; }
+.label { display: block; color: #66665e; font-size: .82rem; margin-bottom: .35rem; }
+.card strong { font-size: 1.45rem; font-variant-numeric: tabular-nums; }
+.detail { font-size: .9rem; line-height: 1.4; }
+.target-choice { display: flex; align-items: center; gap: .65rem; font-weight: 600; }
+.target-choice canvas { width: 40px; height: 40px; border-radius: .3rem; border: 1px solid #00000019; image-rendering: pixelated; }
+.transport { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+button { min-height: 44px; border: 1px solid #00000026; border-radius: .5rem; background: #fff; font: inherit; font-size: 1.15rem; cursor: pointer; }
+button:hover:not(:disabled) { background: #f0f0eb; } button:disabled { cursor: wait; opacity: .45; }
+button:focus-visible { outline: 3px solid #5f6ff3; outline-offset: 2px; }
+.canvas-card { min-height: 420px; display: grid; place-items: center; overflow: hidden; }
+#world { width: min(100%, 760px); aspect-ratio: 1; image-rendering: auto; cursor: crosshair; background: white; box-shadow: 0 .2rem .8rem #0000000b; }
+.target-preview canvas { width: 100%; aspect-ratio: 1; image-rendering: pixelated; border: 1px solid #00000019; border-radius: .35rem; }
+output { display: block; margin: 1rem 0 .3rem; color: #66665e; font-size: .84rem; text-align: center; }
+.caption { margin: 0; color: #66665e; font-size: .84rem; line-height: 1.55; text-align: center; }
+@media (max-width: 860px) { .workspace { grid-template-columns: 1fr; } .control-panel { grid-template-columns: repeat(3, 1fr); } .transport { grid-column: 1 / -1; } .metrics { grid-template-columns: repeat(3, 1fr); } .target-preview { grid-column: span 3; } .canvas-card { min-height: auto; } }
+@media (max-width: 520px) { .control-panel, .metrics { grid-template-columns: 1fr 1fr; } .target-preview { grid-column: span 2; } header span { display: none; } }
