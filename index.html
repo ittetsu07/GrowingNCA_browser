@@ -3,33 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0b1020" />
-    <title>Growing NCA — Browser Training</title>
+    <meta name="theme-color" content="#f8f8f4" />
+    <title>Growing NCA</title>
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
-    <main>
-      <section class="intro">
-        <p class="eyebrow">JAX-js × WebGPU / Wasm</p>
-        <h1>Train a Growing NCA<br />in your browser.</h1>
-        <p class="lede">
-          A tiny neural cellular automaton learns to grow a flower from one living cell. The
-          model, gradients, and optimizer never leave this page.
-        </p>
-      </section>
-
-      <section class="panels" aria-label="Neural cellular automaton output">
-        <figure><figcaption>Training target</figcaption><canvas id="target" width="32" height="32"></canvas></figure>
-        <figure><figcaption>Current growth</figcaption><canvas id="world" width="32" height="32"></canvas></figure>
-      </section>
-
-      <section class="controls" aria-label="Training controls">
-        <button id="toggle" type="button" disabled>Start training</button>
-        <button id="reset-model" type="button" disabled>New model</button>
-        <button id="reset-state" type="button" disabled>Reset seed</button>
-        <label>Backend <select id="backend" disabled><option value="auto">Auto</option><option value="wasm">Wasm</option><option value="webgpu">WebGPU</option></select></label>
-      </section>
+    <main class="demo-shell">
+      <header><a href="/">Growing NCA</a><span>Browser training demo</span></header>
+      <div class="workspace">
+        <aside class="control-panel">
+          <div class="card"><span class="label">Backend</span><strong>Wasm</strong></div>
+          <div class="card"><span class="label">Target</span><div class="target-choice"><canvas id="target" width="32" height="32"></canvas><span>Flower</span></div></div>
+          <div class="card"><span class="label">Training</span><span class="detail">Differentiable Growing NCA</span></div>
+          <div class="transport">
+            <button id="toggle" type="button" disabled aria-label="Play training" title="Play training">▶</button>
+            <button id="step" type="button" disabled aria-label="Train one step" title="Train one step">▸|</button>
+            <button id="reset-model" type="button" disabled aria-label="Reset model" title="Reset model">↺</button>
+          </div>
+        </aside>
+        <section class="canvas-card"><canvas id="world" width="32" height="32" aria-label="Neural cellular automaton"></canvas></section>
+        <aside class="metrics">
+          <div class="card"><span class="label">Steps</span><strong id="steps">0</strong></div>
+          <div class="card"><span class="label">Loss</span><strong id="loss">—</strong></div>
+          <div class="card"><span class="label">Runtime</span><strong id="runtime">Wasm</strong></div>
+          <div class="card"><span class="label">Training speed</span><strong id="throughput">—</strong></div>
+          <div class="card target-preview"><span class="label">Target</span><canvas id="target-preview" width="32" height="32"></canvas></div>
+        </aside>
+      </div>
       <output id="status" aria-live="polite">Initializing JAX-js…</output>
+      <p class="caption">A compact neural cellular automaton learning to grow a flower from a single living cell.</p>
     </main>
     <script type="module" src="/src/app.js"></script>
   </body>
